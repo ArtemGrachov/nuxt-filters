@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitHandler">
+    <form class="sort-row" @submit.prevent="submitHandler">
         <div>
             <label for="sortBy">
                 Sort by:
@@ -40,4 +40,11 @@ export default class ComoonentFormSort extends Vue {
     }
 }
 </script>
+
+<style scoped>
+.sort-row {
+    display: flex;
+    align-items: center;
+}
+</style>
 

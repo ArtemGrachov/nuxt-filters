@@ -1,32 +1,38 @@
 <template>
-  <main>
-        <h1>Catalog</h1>
-        <FormFilter @formSubmit="formSubmitHandler" />
-        <hr>
-        <FormSort @formSubmit="formSubmitHandler" />
-        <hr>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Get products status:</td>
-                    <td>{{ getCatalogStatus }}</td>
-                </tr>
-                <tr>
-                    <td>Get products error: </td>
-                    <td>{{ getCatalogError }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr>
-        <CatalogList
-            :products="products"
-        />
-        <hr>
-        <Pagination
-            :page="formCatalog._page"
-            @pageChange="pageChangeHandler"
-        />
-  </main>
+    <main>
+        <div class="container">
+            <h1>Catalog</h1>
+            <div class="row">
+                <div class="col-sm">
+                    <FormFilter @formSubmit="formSubmitHandler" />
+                </div>
+                <div class="col-lg">
+                    <FormSort @formSubmit="formSubmitHandler" />
+                    <hr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Get products status:</td>
+                                <td>{{ getCatalogStatus }}</td>
+                            </tr>
+                            <tr>
+                                <td>Get products error: </td>
+                                <td>{{ getCatalogError }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <CatalogList
+                        :products="products"
+                    />
+                    <hr>
+                    <Pagination
+                        :page="formCatalog._page"
+                        @pageChange="pageChangeHandler"
+                    />
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script lang="ts">
@@ -207,3 +213,23 @@ export default class PageCatalog extends Vue {
     }
 }
 </script>
+
+<style scoped>
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.row {
+    display: flex;
+    align-items: stretch;
+}
+
+.col-sm {
+    flex: 0 0 300px;
+}
+
+.col-lg {
+    flex: 1 1 auto;
+}
+</style>
