@@ -10,12 +10,12 @@ import httpPageErrorHandler from '~/utils/http-page-error-handler';
 import { IProduct } from '~/types/product.interface';
 
 export default {
-    async get({ commit }, payload: IFormCatalog) {
+    async get({ commit }, payload?: IFormCatalog) {
         try {
             commit('GET');
 
             const params: ICatalogQuery = {
-                ...payload
+                ...(payload || {})
             }
 
             if (!params.category) {

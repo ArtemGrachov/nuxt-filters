@@ -24,7 +24,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Action, Component, Getter, ProvideReactive } from 'nuxt-property-decorator';
+import { Store } from 'vuex';
+import { Action, Component, Getter, ProvideReactive, Watch } from 'nuxt-property-decorator';
 
 import FormFilter from '~/components/FormFilter.vue';
 import FormSort from '~/components/FormSort.vue';
@@ -33,8 +34,11 @@ import CatalogList from '~/components/CatalogList.vue';
 import { IProduct } from '~/types/product.interface';
 import { EStatus } from '~/types/status.enum';
 import { IFormCatalog } from '~/types/form-catalog.interface';
+import { IDictionary } from '~/types/dictionary.interface';
+import { IRootState } from '~/types/root-state.interface';
 
 import storeFormMapper from '~/utils/store-form-mapper';
+import { ESortOrder } from '~/types/sort-order.enum';
 
 @Component({
     components: {
@@ -44,6 +48,40 @@ import storeFormMapper from '~/utils/store-form-mapper';
     }
 })
 export default class PageCatalog extends Vue {
+    static routeQueryToFormValue(query: IDictionary<string>): IFormCatalog {
+        const formValue: IFormCatalog = {};
+
+        if (query._page) {
+            formValue._page = +query._page;
+        }
+
+        if (query._limit) {
+            formValue._limit = +query._limit;
+        }
+
+        if (query._order) {
+            formValue._order = query._order as ESortOrder;
+        }
+
+        if (query._sort) {
+            formValue._sort = query._sort;
+        }
+
+        if (query.price_gte) {
+            formValue.price_gte = +query.price_gte;
+        }
+
+        if (query.price_lte) {
+            formValue.price_lte = +query.price_lte;
+        }
+
+        if (query.category) {
+            formValue.category = query.category;
+        }
+
+        return formValue;
+    }
+
     @Getter('page-catalog-products/products')
     public readonly products!: IProduct[];
 
@@ -58,6 +96,9 @@ export default class PageCatalog extends Vue {
 
     @Action('page-catalog-products/get')
     public getProducts!: (payload: IFormCatalog) => Promise<void>;
+
+    @Action('page-catalog-form/setFormValue')
+    public setFormValue!: (payload: IFormCatalog) => Promise<void>;
 
     @ProvideReactive('DI_FORM_FILTER')
     private get formFilter(): IFormCatalog {
@@ -86,8 +127,65 @@ export default class PageCatalog extends Vue {
         })
     }
 
+    private formValueToQuery(formValue: IFormCatalog): IDictionary<string> {
+        const query: IDictionary<string> = {};
+
+        if (this.formCatalogValue._page) {
+            query._page = this.formCatalogValue._page.toString();
+        }
+
+        if (this.formCatalogValue._limit) {
+            query._limit = this.formCatalogValue._limit.toString();
+        }
+
+        if (this.formCatalogValue._order) {
+            query._order = this.formCatalogValue._order;
+        }
+
+        if (this.formCatalogValue._sort) {
+            query._sort = this.formCatalogValue._sort;
+        }
+
+        if (this.formCatalogValue.price_gte) {
+            query.price_gte = this.formCatalogValue.price_gte.toString();
+        }
+
+        if (this.formCatalogValue.price_lte) {
+            query.price_lte = this.formCatalogValue.price_lte.toString();
+        }
+
+        if (this.formCatalogValue.category) {
+            query.category = this.formCatalogValue.category;
+        }
+
+        return query;
+    }
+
     public async formSubmitHandler(): Promise<void> {
-        await this.getProducts(this.formCatalogValue);
+        const query: IDictionary<string> = this.formValueToQuery(this.formCatalogValue);
+        this.$router.push({ query });
+    }
+
+    public async asyncData(context: any): Promise<void> {
+        const query: IDictionary<string> = context.query;
+        const error: (err: any) => void = context.error;
+        const store: Store<IRootState> = context.store;
+
+        try {
+            const payload: IFormCatalog = PageCatalog.routeQueryToFormValue(query as IDictionary<string>);
+
+            await store.dispatch('page-catalog-form/setFormValue', payload);
+            await store.dispatch('page-catalog-products/get', payload);
+        } catch (err) {
+            error(err);
+        }
+    }
+
+    @Watch('$route.query')
+    public onRouteQueryChanged(newValue: IDictionary<string>): void {
+        const payload: IFormCatalog = PageCatalog.routeQueryToFormValue(newValue);
+        this.setFormValue(payload);
+        this.getProducts(payload);
     }
 }
 </script>
