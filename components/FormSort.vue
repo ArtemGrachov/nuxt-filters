@@ -18,6 +18,9 @@
                 <option value="desc">Descending</option>
             </select>
         </div>
+        <button type="submit">
+            Submit
+        </button>
     </form>
 </template>
 
@@ -33,7 +36,7 @@ export default class ComoonentFormSort extends Vue {
     public form!: IFormCatalog;
 
     public submitHandler(): void {
-
+        this.$emit('formSubmit');
     }
 }
 </script>

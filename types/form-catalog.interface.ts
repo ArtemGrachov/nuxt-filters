@@ -7,5 +7,5 @@ export interface IFormCatalog {
     _sort?: string | null;
     price_gte?: number | null;
     price_lte?: number | null;
-    category?: string[];
+    category?: string | null;
 }

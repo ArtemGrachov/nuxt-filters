@@ -12,7 +12,7 @@ export default {
     },
     GET_SUCCESS: (state, payload: IProduct[]) => {
         state.getStatus = EStatus.SUCCESS;
-        state.getError = payload;
+        state.getError = null;
         state.products = payload;
     },
     GET_ERROR: (state, payload: any) => {

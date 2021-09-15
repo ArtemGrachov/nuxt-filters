@@ -13,7 +13,7 @@ export default (): IPageCatalogFormState => {
             _sort: null,
             price_gte: null,
             price_lte: null,
-            category: []
+            category: null
         }
     };
 }

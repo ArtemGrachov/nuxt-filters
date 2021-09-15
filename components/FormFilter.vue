@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="submitHandler">
+        <h2>Price</h2>
         <div>
             <label for="minPrice">
                 Min price:
@@ -13,9 +14,12 @@
             <input type="number" name="minPrice" id="minPrice" v-model="form.price_lte" />
         </div>
         <div>
+            <h3>
+                Category
+            </h3>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="fruits"
                     name="fruits"
                     value="Fruits"
@@ -27,7 +31,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="vegetables"
                     name="vegetables"
                     value="Vegetables"
@@ -39,7 +43,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="drinks"
                     name="drinks"
                     value="Drinks"
@@ -51,7 +55,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="dairy"
                     name="dairy"
                     value="Dairy products"
@@ -63,7 +67,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="juice"
                     name="juice"
                     value="Juice"
@@ -75,7 +79,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="chocolate"
                     name="chocolate"
                     value="Chocolate"
@@ -87,7 +91,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="bakery"
                     name="bakery"
                     value="Bakery"
@@ -99,7 +103,7 @@
             </div>
             <div>
                 <input
-                    type="checkbox"
+                    type="radio"
                     id="other"
                     value="other"
                     v-model="form.category"
@@ -108,7 +112,21 @@
                     Other
                 </label>
             </div>
+            <div>
+                <input
+                    type="radio"
+                    id="none"
+                    value=""
+                    v-model="form.category"
+                />
+                <label for="none">
+                    All
+                </label>
+            </div>
         </div>
+        <button type="submit">
+            Submit
+        </button>
     </form>
 </template>
 
@@ -123,7 +141,9 @@ export default class ComoonentFormFilter extends Vue {
     @InjectReactive('DI_FORM_FILTER')
     public form!: IFormCatalog;
 
-    public submitHandler(): void {}
+    public submitHandler(): void {
+        this.$emit('formSubmit');
+    }
 }
 </script>
 

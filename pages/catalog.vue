@@ -1,17 +1,30 @@
 <template>
   <main>
       <h1>Catalog</h1>
-      <FormFilter />
+      <FormFilter @formSubmit="formSubmitHandler" />
       <hr>
-      <FormSort />
+      <FormSort @formSubmit="formSubmitHandler" />
       <hr>
-      <CatalogList />
+      <table>
+          <tbody>
+              <tr>
+                  <td>Get products status:</td>
+                  <td>{{ getCatalogStatus }}</td>
+              </tr>
+              <tr>
+                  <td>Get products error: </td>
+                  <td>{{ getCatalogError }}</td>
+              </tr>
+          </tbody>
+      </table>
+      <hr>
+      <CatalogList :products="products" />
   </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Getter, ProvideReactive } from 'nuxt-property-decorator';
+import { Action, Component, Getter, ProvideReactive } from 'nuxt-property-decorator';
 
 import FormFilter from '~/components/FormFilter.vue';
 import FormSort from '~/components/FormSort.vue';
@@ -35,10 +48,16 @@ export default class PageCatalog extends Vue {
     public readonly products!: IProduct[];
 
     @Getter('page-catalog-products/getStatus')
-    public readonly getProductsStatus!: EStatus;
+    public readonly getCatalogStatus!: EStatus;
 
     @Getter('page-catalog-products/getError')
-    public readonly getError!: any;
+    public readonly getCatalogError!: any;
+
+    @Getter('page-catalog-form/formValue')
+    public readonly formCatalogValue!: IFormCatalog;
+
+    @Action('page-catalog-products/get')
+    public getProducts!: (payload: IFormCatalog) => Promise<void>;
 
     @ProvideReactive('DI_FORM_FILTER')
     private get formFilter(): IFormCatalog {
@@ -65,6 +84,10 @@ export default class PageCatalog extends Vue {
                 'category'
             ]
         })
+    }
+
+    public async formSubmitHandler(): Promise<void> {
+        await this.getProducts(this.formCatalogValue);
     }
 }
 </script>

@@ -33,7 +33,7 @@
         {
             "id": 6,
             "category": "Vegetables",
-            "price": 10,
+            "price": 16,
             "name": "Onion"
         },
         {
@@ -57,67 +57,67 @@
         {
             "id": 10,
             "category": "Fruits",
-            "price": 10,
+            "price": 13,
             "name": "Orange"
         },
         {
             "id": 11,
             "category": "Drinks",
-            "price": 10,
+            "price": 25,
             "name": "Tea"
         },
         {
             "id": 12,
             "category": "Drinks",
-            "price": 10,
+            "price": 25,
             "name": "Coffee"
         },
         {
             "id": 13,
             "category": "Drinks",
-            "price": 10,
+            "price": 28,
             "name": "Cacao"
         },
         {
             "id": 14,
             "category": "Dairy products",
-            "price": 10,
+            "price": 12,
             "name": "Milk"
         },
         {
             "id": 15,
             "category": "Juice",
-            "price": 10,
+            "price": 23,
             "name": "Orange juice"
         },
         {
             "id": 16,
             "category": "Juice",
-            "price": 10,
+            "price": 20,
             "name": "Apple juice"
         },
         {
             "id": 17,
             "category": "Chocolate",
-            "price": 10,
+            "price": 18,
             "name": "Chocolate"
         },
         {
             "id": 18,
             "category": "Bakery",
-            "price": 10,
+            "price": 16,
             "name": "Cookies"
         },
         {
             "id": 19,
             "category": "Bakery",
-            "price": 10,
+            "price": 11,
             "name": "Bread"
         },
         {
             "id": 20,
             "category": "Other",
-            "price": 10,
+            "price": 5,
             "name": "Salt"
         }
     ]
