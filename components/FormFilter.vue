@@ -4,13 +4,13 @@
             <label for="minPrice">
                 Min price:
             </label>
-            <input type="text" name="minPrice" id="minPrice" v-model="form.price_gte" />
+            <input type="number" name="minPrice" id="minPrice" v-model="form.price_gte" />
         </div>
         <div>
             <label for="minPrice">
                 Max price:
             </label>
-            <input type="text" name="minPrice" id="minPrice" v-model="form.price_lte" />
+            <input type="number" name="minPrice" id="minPrice" v-model="form.price_lte" />
         </div>
         <div>
             <div>
@@ -108,29 +108,22 @@
                     Other
                 </label>
             </div>
-            </div>
+        </div>
     </form>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'nuxt-property-decorator';
+import { Component, InjectReactive } from 'nuxt-property-decorator';
 
 import { IFormCatalog } from '~/types/form-catalog.interface';
 
 @Component({})
 export default class ComoonentFormFilter extends Vue {
-    public form: IFormCatalog = {
-        _page: null,
-        _limit: null,
-        _order: null,
-        _sort: null,
-        price_gte: null,
-        price_lte: null,
-        category: []
-    };
+    @InjectReactive('DI_FORM_FILTER')
+    public form!: IFormCatalog;
 
-    checkedNames = []
+    public submitHandler(): void {}
 }
 </script>
 

@@ -23,21 +23,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'nuxt-property-decorator';
+import { Component, InjectReactive } from 'nuxt-property-decorator';
 
 import { IFormCatalog } from '~/types/form-catalog.interface';
 
 @Component({})
 export default class ComoonentFormSort extends Vue {
-    public form: IFormCatalog = {
-        _page: null,
-        _limit: null,
-        _order: null,
-        _sort: null,
-        price_gte: null,
-        price_lte: null,
-        category: []
-    };
+    @InjectReactive('DI_FORM_SORT')
+    public form!: IFormCatalog;
+
+    public submitHandler(): void {
+
+    }
 }
 </script>
 
