@@ -1,0 +1,124 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "category": "Fruits",
+            "price": 10,
+            "name": "Apple"
+        },
+        {
+            "id": 2,
+            "category": "Fruits",
+            "price": 20,
+            "name": "Banana"
+        },
+        {
+            "id": 3,
+            "category": "Vegetables",
+            "price": 15,
+            "name": "Tomato"
+        },
+        {
+            "id": 4,
+            "category": "Vegetables",
+            "price": 11,
+            "name": "Potato"
+        },
+        {
+            "id": 5,
+            "category": "Vegetables",
+            "price": 14,
+            "name": "Carrot"
+        },
+        {
+            "id": 6,
+            "category": "Vegetables",
+            "price": 10,
+            "name": "Onion"
+        },
+        {
+            "id": 7,
+            "category": "Vegetables",
+            "price": 12,
+            "name": "Washing Powder"
+        },
+        {
+            "id": 8,
+            "category": "Vegetables",
+            "price": 18,
+            "name": "Pepper"
+        },
+        {
+            "id": 9,
+            "category": "Fruits",
+            "price": 10,
+            "name": "Mango"
+        },
+        {
+            "id": 10,
+            "category": "Fruits",
+            "price": 10,
+            "name": "Orange"
+        },
+        {
+            "id": 11,
+            "category": "Drinks",
+            "price": 10,
+            "name": "Tea"
+        },
+        {
+            "id": 12,
+            "category": "Drinks",
+            "price": 10,
+            "name": "Coffee"
+        },
+        {
+            "id": 13,
+            "category": "Drinks",
+            "price": 10,
+            "name": "Cacao"
+        },
+        {
+            "id": 14,
+            "category": "Dairy products",
+            "price": 10,
+            "name": "Milk"
+        },
+        {
+            "id": 15,
+            "category": "Juice",
+            "price": 10,
+            "name": "Orange juice"
+        },
+        {
+            "id": 16,
+            "category": "Juice",
+            "price": 10,
+            "name": "Apple juice"
+        },
+        {
+            "id": 17,
+            "category": "Chocolate",
+            "price": 10,
+            "name": "Chocolate"
+        },
+        {
+            "id": 18,
+            "category": "Bakery",
+            "price": 10,
+            "name": "Cookies"
+        },
+        {
+            "id": 19,
+            "category": "Bakery",
+            "price": 10,
+            "name": "Bread"
+        },
+        {
+            "id": 20,
+            "category": "Other",
+            "price": 10,
+            "name": "Salt"
+        }
+    ]
+}
