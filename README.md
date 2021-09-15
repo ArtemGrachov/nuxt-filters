@@ -1,5 +1,35 @@
 # nuxt-filters
 
+This is an example on nuxt project with handling sorting, filters and pagination.
+The example covers handling browser URL change, form change, pagination, browser navigation etc.
+
+## Backend
+
+Mock backend made with `json-server` is used.
+
+You have to set up `json-server`:
+
+```
+npm i -g json-server
+```
+
+Then to launch the server:
+
+```
+json-server db/db.json --port=3003
+```
+
+If you will specify other port, do not forget to change URL in `store/page-catalog-products/actions.ts`.
+
+After launching the backend, you have to start frontend server:
+
+```
+npm run dev
+```
+
+## Limitations
+To keep the example as simple as possible, no preloader, button disabling, error handlers etc. were added.
+
 ## Build Setup
 
 ```bash
