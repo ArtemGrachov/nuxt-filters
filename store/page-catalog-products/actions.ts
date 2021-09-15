@@ -9,10 +9,20 @@ import { ICatalogQuery } from '~/types/catalog-query.interface';
 import httpPageErrorHandler from '~/utils/http-page-error-handler';
 import { IProduct } from '~/types/product.interface';
 
+const LIMIT_DEFAULT: number = 5;
+
 export default {
     async get({ commit }, payload?: IFormCatalog) {
         try {
             commit('GET');
+
+            if (!payload) {
+                payload = {};
+            }
+
+            if (!payload._limit) {
+                payload._limit = LIMIT_DEFAULT;
+            }
 
             const params: ICatalogQuery = {
                 ...(payload || {})

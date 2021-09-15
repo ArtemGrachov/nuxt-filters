@@ -1,24 +1,31 @@
 <template>
   <main>
-      <h1>Catalog</h1>
-      <FormFilter @formSubmit="formSubmitHandler" />
-      <hr>
-      <FormSort @formSubmit="formSubmitHandler" />
-      <hr>
-      <table>
-          <tbody>
-              <tr>
-                  <td>Get products status:</td>
-                  <td>{{ getCatalogStatus }}</td>
-              </tr>
-              <tr>
-                  <td>Get products error: </td>
-                  <td>{{ getCatalogError }}</td>
-              </tr>
-          </tbody>
-      </table>
-      <hr>
-      <CatalogList :products="products" />
+        <h1>Catalog</h1>
+        <FormFilter @formSubmit="formSubmitHandler" />
+        <hr>
+        <FormSort @formSubmit="formSubmitHandler" />
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Get products status:</td>
+                    <td>{{ getCatalogStatus }}</td>
+                </tr>
+                <tr>
+                    <td>Get products error: </td>
+                    <td>{{ getCatalogError }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <CatalogList
+            :products="products"
+        />
+        <hr>
+        <Pagination
+            :page="formCatalog._page"
+            @pageChange="pageChangeHandler"
+        />
   </main>
 </template>
 
@@ -30,6 +37,7 @@ import { Action, Component, Getter, ProvideReactive, Watch } from 'nuxt-property
 import FormFilter from '~/components/FormFilter.vue';
 import FormSort from '~/components/FormSort.vue';
 import CatalogList from '~/components/CatalogList.vue';
+import Pagination from '~/components/Pagination.vue';
 
 import { IProduct } from '~/types/product.interface';
 import { EStatus } from '~/types/status.enum';
@@ -39,12 +47,14 @@ import { IRootState } from '~/types/root-state.interface';
 
 import storeFormMapper from '~/utils/store-form-mapper';
 import { ESortOrder } from '~/types/sort-order.enum';
+import { IUpdateFieldPayload } from '~/types/update-field-payload.interface';
 
 @Component({
     components: {
         FormFilter,
         FormSort,
-        CatalogList
+        CatalogList,
+        Pagination
     }
 })
 export default class PageCatalog extends Vue {
@@ -99,6 +109,9 @@ export default class PageCatalog extends Vue {
 
     @Action('page-catalog-form/setFormValue')
     public setFormValue!: (payload: IFormCatalog) => Promise<void>;
+
+    @Action('page-catalog-form/setFormField')
+    public updateFormfield!: (payload: IUpdateFieldPayload<any>) => Promise<void>;
 
     @ProvideReactive('DI_FORM_FILTER')
     private get formFilter(): IFormCatalog {
@@ -161,9 +174,14 @@ export default class PageCatalog extends Vue {
         return query;
     }
 
-    public async formSubmitHandler(): Promise<void> {
+    public formSubmitHandler(): void {
         const query: IDictionary<string> = this.formValueToQuery(this.formCatalogValue);
         this.$router.push({ query });
+    }
+
+    public pageChangeHandler(page: number): void {
+        this.updateFormfield({ field: '_page', value: page });
+        this.formSubmitHandler();
     }
 
     public async asyncData(context: any): Promise<void> {
