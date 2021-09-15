@@ -1,5 +1,9 @@
 <template>
-  <Tutorial/>
+    <main>
+        <NuxtLink :to="'/catalog'">
+            Open catalog
+        </NuxtLink>
+    </main>
 </template>
 
 <script lang="ts">

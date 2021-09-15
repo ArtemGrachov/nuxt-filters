@@ -1,0 +1,43 @@
+<template>
+    <form @submit.prevent="submitHandler">
+        <div>
+            <label for="sortBy">
+                Sort by:
+            </label>
+            <select name="sortBy" id="sortBy" v-model="form._sort" >
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+            </select>
+        </div>
+        <div>
+            <label for="order">
+                Order:
+            </label>
+            <select name="order" id="order" v-model="form._order" >
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+    </form>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import { Component } from 'nuxt-property-decorator';
+
+import { IFormCatalog } from '~/types/form-catalog.interface';
+
+@Component({})
+export default class ComoonentFormSort extends Vue {
+    public form: IFormCatalog = {
+        _page: null,
+        _limit: null,
+        _order: null,
+        _sort: null,
+        price_gte: null,
+        price_lte: null,
+        category: []
+    };
+}
+</script>
+
